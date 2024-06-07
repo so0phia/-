@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System and Starry Night</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background: black;
+        }
+
+        .star-field {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.8;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px; /* 태양의 크기 */
+            height: 100px;
+            background-color: #FFD700; /* 태양 색상 */
+            border-radius: 50%;
+            box-shadow: 0 0 50px #FFD700; /* 태양 광휘 효과 */
+            z-index: 1;
+        }
+
+        .planet {
+            position: absolute;
+            width: 20px; /* 행성의 크기 */
+            height: 20px;
+            background-color: #7F8C8D; /* 행성 색상 */
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .planet2 {
+            position: absolute;
+            width: 30px; /* 행성의 크기 */
+            height: 30px;
+            background-color: blue; /* 행성 색상 */
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .moon {
+            position: absolute;
+            width: 10px; /* 위성의 크기 */
+            height: 10px;
+            background-color: #D3D3D3; /* 위성 색상 */
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="star-field" id="star-field"></div>
+    <div class="sun"></div>
+    <div class="planet" style="top: 50%; left: 50%; animation: orbit 10s linear infinite;"></div>
+    <div class="moon" style="top: 45%; left: 50%; animation: orbit 5s linear infinite;"></div>
+    <div class="planet2" style="top: 55%; left: 50%; animation: orbit 13s linear infinite;"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const starField = document.getElementById('star-field');
+            const starCount = 1000;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = `${2 + Math.random() * 4}px`;
+                star.style.height = star.style.width;
+                star.style.top = `${Math.random() * window.innerHeight}px`;
+                star.style.left = `${Math.random() * window.innerWidth}px`;
+                star.style.animationDuration = `${2 + Math.random() * 3}s`;
+                starField.appendChild(star);
+            }
+        });
+    </script>
+</body>
+</html>
